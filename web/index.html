@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffd84d">
+  <meta name="description" content="한국어 로컬 실시간 자막과 화자분리를 결합한 공간 자막 프로토타입">
+  <title>누구말? — 말에도 자리가 필요하니까</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gaegu:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell" id="app" data-mode="idle">
+    <header class="topbar">
+      <button class="brand" id="brandButton" type="button" aria-label="누구말 처음 화면으로">
+        <span class="brand-mark" aria-hidden="true">?</span>
+        <span class="brand-copy">
+          <strong>누구말?</strong>
+          <small>누가 말했는지까지 보여주는 자막</small>
+        </span>
+      </button>
+
+      <div class="topbar-actions">
+        <div class="engine-badge" id="engineBadge" data-state="checking" title="로컬 음성 엔진 상태">
+          <span class="engine-dot" aria-hidden="true"></span>
+          <span id="engineText">로컬 AI 확인 중</span>
+        </div>
+        <div class="engine-badge speaker-badge" id="speakerBadge" data-state="ready" title="2인 발화 순서 모드">
+          <span class="engine-dot" aria-hidden="true"></span>
+          <span id="speakerText">2인 순서 모드 · 1 ↔ 2</span>
+        </div>
+        <button class="icon-button" id="prototypeButton" type="button" aria-label="프로토타입 범위 보기">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 10.8v6"></path><circle cx="12" cy="7.4" r=".8" fill="currentColor" stroke="none"></circle></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="welcome" id="welcomeView" aria-labelledby="welcomeTitle">
+        <div class="welcome-copy">
+          <div class="eyebrow"><span aria-hidden="true">●</span> 목소리마다 자막 자리 하나</div>
+          <h1 id="welcomeTitle">말에도<br><em>자리가 필요하니까.</em></h1>
+          <p>누구말?은 한국어 대화를 이 PC 안에서 받아쓰고,<br class="desktop-only"> 발화 순서대로 사람 1과 사람 2 자막을 번갈아 보여줘요.</p>
+
+          <div class="welcome-actions">
+            <button class="primary-button" id="startButton" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M6 11a6 6 0 0 0 12 0M12 17v4M8.5 21h7"></path></svg>
+              마이크로 시작하기
+            </button>
+            <button class="secondary-button" id="demoButton" type="button">30초 데모 보기 <span aria-hidden="true">→</span></button>
+          </div>
+
+          <div class="privacy-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2"></path><rect x="5" y="10" width="14" height="11" rx="3"></rect></svg>
+            <span><strong>전부 이 PC에서 처리해요.</strong> 음성과 자막을 외부 API로 보내거나 저장하지 않아요.</span>
+          </div>
+        </div>
+
+        <div class="hero-demo" aria-label="사람 1과 사람 2 자막이 번갈아 나타나는 예시">
+          <div class="hero-sticker sticker-left">“우리 몇 시에 갈까?”</div>
+          <div class="hero-sticker sticker-right">“세 시 어때?”</div>
+          <div class="person person-left" aria-hidden="true"><span class="hair"></span><span class="face"><i></i><i></i><b></b></span><span class="body"></span></div>
+          <div class="person person-right" aria-hidden="true"><span class="hair"></span><span class="face"><i></i><i></i><b></b></span><span class="body"></span></div>
+          <div class="table-illustration" aria-hidden="true"><span class="phone"><i></i></span></div>
+          <div class="hero-caption">A → B → <strong>다시 A</strong></div>
+        </div>
+
+        <div class="flow-strip" aria-label="작동 과정">
+          <div><span class="flow-number">1</span><p><strong>듣고</strong><small>한국어 실시간 자막</small></p></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div><span class="flow-number">2</span><p><strong>나누고</strong><small>발화마다 사람 1 ↔ 2</small></p></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div><span class="flow-number">3</span><p><strong>자리 잡고</strong><small>두 자리를 번갈아 표시</small></p></div>
+        </div>
+      </section>
+
+      <section class="session" id="sessionView" hidden aria-label="실시간 공간 자막">
+        <div class="session-status-row">
+          <div class="listening-pill" id="listeningPill" data-state="connecting">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span id="listeningText">연결 중</span>
+            <span class="timer" id="timer">00:00</span>
+          </div>
+          <div class="speaker-count"><strong id="speakerCount">0</strong>명 참여 중</div>
+        </div>
+
+        <section class="seat-stage" aria-labelledby="seatHeading">
+          <div class="section-heading">
+            <div>
+              <span class="section-kicker">오늘의 말자리</span>
+              <h2 id="seatHeading">목소리가 자기 자리를 찾아가요</h2>
+            </div>
+            <span class="seat-hint">첫 발화는 왼쪽, 다음 발화는 오른쪽이에요</span>
+          </div>
+          <div class="seat-grid" id="seatGrid"></div>
+        </section>
+
+        <section class="caption-panel" aria-labelledby="captionHeading">
+          <div class="caption-panel-head">
+            <h2 id="captionHeading">지금 대화</h2>
+            <div class="caption-panel-meta">
+              <span class="source-key source-key-local">LOCAL · 한국어 전용</span>
+              <span id="captionStatus">첫 목소리를 기다리는 중</span>
+            </div>
+          </div>
+          <div class="caption-feed" id="captionFeed" aria-live="polite" aria-relevant="additions text">
+            <div class="empty-caption" id="emptyCaption">
+              <span class="empty-icon" aria-hidden="true">···</span>
+              <strong>대화를 시작해 보세요</strong>
+              <p>자막이 화자의 자리에서 나타나요.</p>
+            </div>
+            <article class="caption-row live-caption-row position-center" id="liveCaptionRow" hidden>
+              <div class="caption-speaker"><i aria-hidden="true"></i><span id="liveSpeakerLabel">다음: 사람 1 · 실시간</span></div>
+              <div class="caption-bubble"><span id="liveCaptionText"></span><span class="live-cursor" aria-hidden="true"></span></div>
+            </article>
+          </div>
+        </section>
+
+        <div class="control-dock">
+          <div class="dock-copy">
+            <span class="dock-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+            <span><strong id="dockTitle">계속 듣고 있어요</strong><small id="dockSubtitle">발화마다 사람 1과 사람 2를 번갈아 표시해요</small></span>
+          </div>
+          <button class="hearing-range" id="hearingRangeButton" type="button" data-profile="near">
+            <span class="range-icon" aria-hidden="true">◎</span>
+            <span><small>수음 범위</small><strong id="hearingRangeText">내 테이블</strong></span>
+          </button>
+          <div class="mic-health" id="micHealth" data-state="idle" aria-label="마이크 입력 상태">
+            <span class="mic-meter" aria-hidden="true"><i id="micMeterFill"></i></span>
+            <strong id="micLevelText">마이크 대기</strong>
+          </div>
+          <button class="stop-button" id="stopButton" type="button"><span aria-hidden="true"></span> 마이크 끄기</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="siteFooter">
+      <span>누구말? prototype</span>
+      <button id="footerScopeButton" type="button">자리는 자동 배정돼요 · 자세히 보기</button>
+    </footer>
+  </div>
+
+  <dialog class="scope-dialog" id="scopeDialog">
+    <div class="scope-head">
+      <div>
+        <span class="section-kicker">솔직한 프로토타입</span>
+        <h2>지금 되는 것과 아직인 것</h2>
+      </div>
+      <button class="dialog-close" id="scopeCloseButton" type="button" aria-label="닫기">×</button>
+    </div>
+    <div class="scope-columns">
+      <section>
+        <h3><span class="scope-check">✓</span> 지금 동작해요</h3>
+        <ul>
+          <li>한국어 전용 로컬 실시간 STT</li>
+          <li>발화 순서 기반 사람 1 ↔ 사람 2 반복</li>
+          <li>내 테이블 중심 배경음 차단</li>
+          <li>사람 1은 왼쪽, 사람 2는 오른쪽 자막</li>
+          <li>API 호출 없이 PC 내부에서만 처리</li>
+        </ul>
+      </section>
+      <section>
+        <h3><span class="scope-warn">△</span> 아직 지원하지 않아요</h3>
+        <ul>
+          <li>실제 음원의 방향 자동 감지</li>
+          <li>실제 목소리 특징을 이용한 화자 식별</li>
+          <li>이전 세션의 화자 기억</li>
+          <li>겹쳐 말하기의 완벽한 분리</li>
+          <li>비언어적 소리 인식</li>
+        </ul>
+      </section>
+    </div>
+    <div class="model-note">
+      <strong>이 PC의 모델</strong>
+      <p>Nemotron 3.5 한국어 STT · 발화 순서 2인 모드 · CUDA</p>
+    </div>
+    <form method="dialog"><button class="primary-button compact" type="submit">확인했어요</button></form>
+  </dialog>
+
+  <div class="toast" id="toast" hidden role="status"><span id="toastText"></span><button id="toastAction" type="button" hidden></button></div>
+  <p class="sr-only" id="screenReaderStatus" aria-live="assertive"></p>
+</body>
+</html>

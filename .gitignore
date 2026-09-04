@@ -1,0 +1,6 @@
+.runtime/
+__pycache__/
+*.log
+.DS_Store
+.env
+.env.local
