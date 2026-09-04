@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gaegu:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f0eee9;font-family:"IBM Plex Sans KR",system-ui,sans-serif}
+a{color:#2a78d6}a:hover{color:#1a5cab}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}
+.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)}
+.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+.dv-opt:target .dv-oid{background:#2a78d6;color:#fff}
+.dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes popin{0%{transform:translateY(8px) scale(.96);opacity:0}100%{transform:none;opacity:1}}
+@keyframes glow{0%,100%{box-shadow:0 0 18px 4px rgba(255,214,90,.55)}50%{box-shadow:0 0 30px 10px rgba(255,214,90,.85)}}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">웹(데스크톱) 버전 — 노트북을 테이블 가운데 두고 보는 화면</span></div>
+<div class="dv-opts">
+
+<!-- ═══════ 2a 말자리 웹: 좌석이 곧 자막 컬럼 ═══════ -->
+<div class="dv-opt" id="2a">
+<div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>말자리 웹 — 화자 = 컬럼. 새 화자가 오면 컬럼이 하나 늘어남 (<a class="dv-oid" href="#1a">1a</a> 기반)</div>
+<div class="dv-card" style="width:1060px;background:#faf6ee">
+<div style="display:flex;flex-direction:column;min-height:640px;font-family:'Gowun Dodum',sans-serif;color:#2b2115">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:2px solid #ece1c8">
+    <div style="display:flex;align-items:baseline;gap:12px">
+      <div style="font-family:'Do Hyeon',sans-serif;font-size:28px">말자리</div>
+      <div style="font-size:13px;color:#a08a5f">말에도 자리가 필요하니까</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:#8a6f3c;background:#f3e9d2;border-radius:999px;padding:7px 14px">
+        <span style="width:8px;height:8px;border-radius:50%;background:#e2574c;animation:blink 1.4s infinite"></span>듣는 중 · 04:12
+      </div>
+      <div style="background:#e2574c;color:#fff;border-radius:999px;padding:7px 18px;font-size:13px">⏹ 종료</div>
+    </div>
+  </div>
+  <!-- 3 columns = seats -->
+  <div style="flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0">
+    <div style="display:flex;flex-direction:column;border-right:2px dashed #e7dcc2;padding:20px 22px;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:2px solid #f4a259">
+        <div style="width:44px;height:44px;border-radius:50%;background:#f4a259;display:grid;place-items:center;font-family:'Do Hyeon',sans-serif;font-size:19px;color:#fff;animation:pulse 1.6s infinite">민</div>
+        <div><div style="font-size:16px;font-weight:700">민수</div><div style="font-size:11px;color:#a08a5f">← 왼쪽 · 말하는 중</div></div>
+      </div>
+      <div style="background:#fff;border:2px solid #f4a259;border-radius:6px 16px 16px 16px;padding:12px 15px;font-size:17px;line-height:1.5">우리 발표 몇 시에 시작하지?</div>
+      <div style="background:#fdf1e0;border:2px solid #f4a259;border-radius:6px 16px 16px 16px;padding:12px 15px;font-size:17px;line-height:1.5;box-shadow:0 3px 0 #f4a259">그러면 세 시 반에 만나자.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:2px dashed #e7dcc2;padding:20px 22px;gap:12px">
+      <div style="width:64px;height:64px;border-radius:50%;border:3px dashed #d8c9a4;display:grid;place-items:center;font-size:24px;color:#c4ad7c">?</div>
+      <div style="font-size:14px;color:#b7a476">빈자리 · 맞은편</div>
+      <div style="font-size:12px;color:#c4b28a;text-align:center;line-height:1.6">새 목소리가 들리면<br>여기에 자리가 생겨요</div>
+    </div>
+    <div style="display:flex;flex-direction:column;padding:20px 22px;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:2px solid #7fa06b">
+        <div style="width:44px;height:44px;border-radius:50%;background:#7fa06b;display:grid;place-items:center;font-family:'Do Hyeon',sans-serif;font-size:19px;color:#fff">지</div>
+        <div><div style="font-size:16px;font-weight:700">지수</div><div style="font-size:11px;color:#a08a5f">오른쪽 →</div></div>
+      </div>
+      <div style="background:#fff;border:2px solid #7fa06b;border-radius:16px 6px 16px 16px;padding:12px 15px;font-size:17px;line-height:1.5">네 시에 시작해.</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 28px;border-top:2px solid #ece1c8;font-size:12px;color:#a08a5f">
+    <div>ⓘ 프로토타입 — 목소리로 화자를 구분해요. 방향은 자동 감지하지 않아요.</div>
+    <div>자리 2/3 착석</div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ═══════ 2b 누구말? 웹: 만화 스트립 ═══════ -->
+<div class="dv-opt" id="2b">
+<div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>누구말? 웹 — 아바타 줄 + 만화 말풍선 흐름, 새 화자 확인 모달 (<a class="dv-oid" href="#1b">1b</a> 기반)</div>
+<div class="dv-card" style="width:1060px;background:#fffdf5">
+<div style="display:flex;flex-direction:column;min-height:640px;font-family:'Gaegu',sans-serif;color:#141414;position:relative">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 26px;border-bottom:3px solid #141414;background:#ffd84d">
+    <div style="font-family:'Black Han Sans',sans-serif;font-size:28px">누구말?</div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <!-- speaker roster: fills up one by one -->
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="width:44px;height:44px;border-radius:50%;background:#7cc6fe;border:3px solid #141414;display:grid;place-items:center;font-family:'Black Han Sans',sans-serif;font-size:18px">A</div>
+        <div style="width:44px;height:44px;border-radius:50%;background:#ff9ecd;border:3px solid #141414;display:grid;place-items:center;font-family:'Black Han Sans',sans-serif;font-size:18px">B</div>
+        <div style="width:44px;height:44px;border-radius:50%;background:#b8f26d;border:3px solid #141414;display:grid;place-items:center;font-family:'Black Han Sans',sans-serif;font-size:18px;animation:popin .5s ease">?</div>
+        <div style="width:44px;height:44px;border-radius:50%;border:3px dashed rgba(20,20,20,.35);display:grid;place-items:center;font-size:16px;color:rgba(20,20,20,.35)">+</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;background:#141414;color:#ffd84d;border-radius:999px;padding:6px 14px;font-size:15px;font-weight:700">
+        <span style="width:8px;height:8px;border-radius:50%;background:#ff5a4e;animation:blink 1.2s infinite"></span>ON AIR
+      </div>
+    </div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:22px;padding:28px 60px">
+    <div style="display:flex;gap:12px;align-items:flex-start;max-width:60%">
+      <div style="width:54px;height:54px;border-radius:50%;background:#7cc6fe;border:3px solid #141414;display:grid;place-items:center;font-family:'Black Han Sans',sans-serif;font-size:22px;flex:none">A</div>
+      <div style="position:relative;background:#fff;border:3px solid #141414;border-radius:14px;padding:12px 18px;font-size:22px;line-height:1.35;box-shadow:5px 5px 0 #141414">
+        <span style="position:absolute;left:-13px;top:18px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:13px solid #141414"></span>
+        우리 발표 몇 시에 시작하지?
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:flex-start;flex-direction:row-reverse;max-width:60%;align-self:flex-end">
+      <div style="width:54px;height:54px;border-radius:50%;background:#ff9ecd;border:3px solid #141414;display:grid;place-items:center;font-family:'Black Han Sans',sans-serif;font-size:22px;flex:none">B</div>
+      <div style="position:relative;background:#fff;border:3px solid #141414;border-radius:14px;padding:12px 18px;font-size:22px;line-height:1.35;box-shadow:-5px 5px 0 #141414">
+        <span style="position:absolute;right:-13px;top:18px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #141414"></span>
+        네 시에 시작해.
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:flex-start;max-width:60%">
+      <div style="width:54px;height:54px;border-radius:50%;background:#7cc6fe;border:3px solid #141414;display:grid;place-items:center;font-family:'Black Han Sans',sans-serif;font-size:22px;flex:none;animation:pulse 1.4s infinite">A</div>
+      <div style="position:relative;background:#ffd84d;border:3px solid #141414;border-radius:14px;padding:12px 18px;font-size:22px;line-height:1.35;box-shadow:5px 5px 0 #141414">
+        <span style="position:absolute;left:-13px;top:18px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:13px solid #141414"></span>
+        그러면 세 시 반에 만나자!
+      </div>
+    </div>
+  </div>
+  <!-- centered review modal -->
+  <div style="position:absolute;left:50%;bottom:26px;transform:translateX(-50%);width:520px;background:#fff;border:3px solid #141414;border-radius:20px;box-shadow:8px 8px 0 #141414;padding:18px 20px;animation:popin .5s ease">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+      <div style="width:48px;height:48px;border-radius:50%;background:#b8f26d;border:3px solid #141414;display:grid;place-items:center;font-family:'Black Han Sans',sans-serif;font-size:22px">?</div>
+      <div>
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:20px">앗, 새로운 목소리 등장!</div>
+        <div style="font-size:16px;color:#666">이 사람 어디 앉아 있어요?</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:10px">
+      <div style="flex:1;text-align:center;border:3px solid #141414;border-radius:12px;padding:10px 0;font-size:17px;font-weight:700;background:#fff">← 왼쪽</div>
+      <div style="flex:1;text-align:center;border:3px solid #141414;border-radius:12px;padding:10px 0;font-size:17px;font-weight:700;background:#ffd84d;box-shadow:3px 3px 0 #141414">↑ 맞은편</div>
+      <div style="flex:1;text-align:center;border:3px solid #141414;border-radius:12px;padding:10px 0;font-size:17px;font-weight:700;background:#fff">오른쪽 →</div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <div style="flex:1;border:3px solid #141414;border-radius:12px;padding:10px 14px;font-size:17px;color:#999">이름 (선택) 예: 지수</div>
+      <div style="border:3px solid #141414;border-radius:12px;padding:10px 20px;font-size:17px;font-weight:700;background:#141414;color:#ffd84d">확인!</div>
+    </div>
+  </div>
+  <div style="height:120px"></div>
+</div>
+</div>
+</div>
+
+<!-- ═══════ 2c 무대 웹: 풀와이드 스테이지 ═══════ -->
+<div class="dv-opt" id="2c">
+<div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>무대 웹 — 화면 전체가 무대, 자막이 화자 조명 아래에서 큼직하게 (<a class="dv-oid" href="#1c">1c</a> 기반)</div>
+<div class="dv-card" style="width:1060px;background:#101014">
+<div style="display:flex;flex-direction:column;min-height:640px;font-family:'IBM Plex Sans KR',sans-serif;color:#f2efe6">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px">
+    <div style="font-weight:700;font-size:22px;letter-spacing:2px">말자리<span style="color:#ffd65a">.</span></div>
+    <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:#8b8b96;letter-spacing:2px">
+      <span>화자 2 / 자리 3</span>
+      <span>LIVE <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff5a4e;animation:blink 1.3s infinite;vertical-align:1px"></span></span>
+      <span style="border:1px solid #3a3a44;border-radius:999px;padding:6px 16px;color:#c9c9d2;letter-spacing:1px">⏹ 종료</span>
+    </div>
+  </div>
+  <!-- full-width stage: speakers with light cones, captions beneath -->
+  <div style="flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;padding:10px 28px 24px">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+      <div style="width:0;height:0;border-left:60px solid transparent;border-right:60px solid transparent;border-bottom:90px solid rgba(255,214,90,.13)"></div>
+      <div style="width:64px;height:64px;border-radius:50%;background:#ffd65a;color:#101014;display:grid;place-items:center;font-weight:700;font-size:24px;margin-top:-58px;animation:glow 1.8s infinite">민</div>
+      <div style="font-size:14px;color:#ffd65a;font-weight:700">민수 · 왼쪽</div>
+      <div style="display:flex;flex-direction:column;gap:12px;width:100%;margin-top:8px">
+        <div style="border-left:3px solid #ffd65a;padding:4px 0 4px 14px;font-size:25px;line-height:1.4;font-weight:500">우리 발표 몇 시에 시작하지?</div>
+        <div style="border-left:3px solid #ffd65a;padding:4px 0 4px 14px;font-size:25px;line-height:1.4;font-weight:500;color:#ffe9a8">그러면 세 시 반에 만나자<span style="display:inline-block;width:10px;height:24px;background:#ffd65a;margin-left:4px;vertical-align:-3px;animation:blink .9s infinite"></span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:14px;opacity:.5">
+      <div style="width:0;height:0;border-left:60px solid transparent;border-right:60px solid transparent;border-bottom:90px solid rgba(255,255,255,.05)"></div>
+      <div style="width:64px;height:64px;border-radius:50%;border:2px dashed #4a4a55;display:grid;place-items:center;font-size:22px;color:#4a4a55;margin-top:-58px">?</div>
+      <div style="font-size:13px;color:#5b5b66">빈 조명 · 맞은편</div>
+      <div style="font-size:12px;color:#5b5b66;text-align:center;line-height:1.7">새 목소리가 들리면<br>이 조명이 켜져요</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+      <div style="width:0;height:0;border-left:60px solid transparent;border-right:60px solid transparent;border-bottom:90px solid rgba(124,198,254,.11)"></div>
+      <div style="width:64px;height:64px;border-radius:50%;background:#7cc6fe;color:#101014;display:grid;place-items:center;font-weight:700;font-size:24px;margin-top:-58px">지</div>
+      <div style="font-size:14px;color:#7cc6fe;font-weight:700">지수 · 오른쪽</div>
+      <div style="display:flex;flex-direction:column;gap:12px;width:100%;margin-top:8px">
+        <div style="border-left:3px solid #7cc6fe;padding:4px 0 4px 14px;font-size:25px;line-height:1.4;font-weight:500;color:#d8ecfd">네 시에 시작해.</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 28px;border-top:1px solid #2e2e38;font-size:12px;color:#8b8b96">
+    <div>ⓘ 목소리로 화자를 구분합니다 · 방향 자동 감지는 하지 않아요</div>
+    <div style="letter-spacing:1px">04:12</div>
+  </div>
+</div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">다음 시도: "<a class="dv-oid" href="#2a">2a</a>로 인터랙티브 프로토타입 만들어줘 (화자 추가 데모 포함)" · "<a class="dv-oid" href="#2b">2b</a>에서 모달 말고 인라인 확인으로" · "<a class="dv-oid" href="#2c">2c</a> 밝은 버전"</p>
+</section>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">말자리 / 누구말? — 화자가 한 명씩 "자리를 잡는" 공간 자막, 3가지 방향</span></div>
+<div class="dv-opts">
+
+<!-- ═══════════════ 1a 말자리 : 자리 배정 메타포 ═══════════════ -->
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>말자리 — 테이블 좌석 배정 메타포, 빈자리가 채워지는 재미</div>
+<div class="dv-card" style="width:390px;background:#faf6ee">
+<div style="display:flex;flex-direction:column;min-height:780px;font-family:'Gowun Dodum',sans-serif;color:#2b2115">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px 10px">
+    <div style="font-family:'Do Hyeon',sans-serif;font-size:24px;letter-spacing:.5px">말자리</div>
+    <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#8a6f3c;background:#f3e9d2;border-radius:999px;padding:6px 12px">
+      <span style="width:8px;height:8px;border-radius:50%;background:#e2574c;animation:blink 1.4s infinite"></span>듣는 중
+    </div>
+  </div>
+  <!-- seat row -->
+  <div style="padding:10px 20px 0">
+    <div style="font-size:11px;color:#a08a5f;margin-bottom:8px;letter-spacing:1px">오늘의 자리 · 2/3 착석</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border:2px solid #e7dcc2;border-radius:16px;padding:12px 6px 10px;animation:pulse 1.6s infinite">
+        <div style="width:46px;height:46px;border-radius:50%;background:#f4a259;display:grid;place-items:center;font-family:'Do Hyeon',sans-serif;font-size:20px;color:#fff">민</div>
+        <div style="font-size:13px;font-weight:700">민수</div>
+        <div style="font-size:10px;color:#a08a5f">← 왼쪽</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border:2px dashed #d8c9a4;border-radius:16px;padding:12px 6px 10px;opacity:.75">
+        <div style="width:46px;height:46px;border-radius:50%;background:#f3e9d2;display:grid;place-items:center;font-size:19px;color:#c4ad7c">?</div>
+        <div style="font-size:13px;color:#b7a476">빈자리</div>
+        <div style="font-size:10px;color:#c4b28a">맞은편</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border:2px solid #e7dcc2;border-radius:16px;padding:12px 6px 10px">
+        <div style="width:46px;height:46px;border-radius:50%;background:#7fa06b;display:grid;place-items:center;font-family:'Do Hyeon',sans-serif;font-size:20px;color:#fff">지</div>
+        <div style="font-size:13px;font-weight:700">지수</div>
+        <div style="font-size:10px;color:#a08a5f">오른쪽 →</div>
+      </div>
+    </div>
+  </div>
+  <!-- captions -->
+  <div style="flex:1;display:flex;flex-direction:column;gap:14px;padding:22px 20px;overflow:hidden">
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;max-width:78%">
+      <div style="font-size:11px;color:#c07a2d;font-weight:700">민수</div>
+      <div style="background:#fff;border:2px solid #f4a259;border-radius:4px 18px 18px 18px;padding:12px 16px;font-size:17px;line-height:1.45">우리 발표 몇 시에 시작하지?</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;max-width:78%;align-self:flex-end">
+      <div style="font-size:11px;color:#5c7d4a;font-weight:700">지수</div>
+      <div style="background:#fff;border:2px solid #7fa06b;border-radius:18px 4px 18px 18px;padding:12px 16px;font-size:17px;line-height:1.45">네 시에 시작해.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;max-width:78%">
+      <div style="font-size:11px;color:#c07a2d;font-weight:700">민수</div>
+      <div style="background:#fdf1e0;border:2px solid #f4a259;border-radius:4px 18px 18px 18px;padding:12px 16px;font-size:17px;line-height:1.45;box-shadow:0 3px 0 #f4a259;animation:pulse 1.6s infinite;transform-origin:left top">그러면 세 시 반에 만나자.</div>
+    </div>
+  </div>
+  <!-- new speaker toast -->
+  <div style="margin:0 16px 12px;background:#2b2115;color:#faf6ee;border-radius:18px;padding:14px 16px;display:flex;align-items:center;gap:12px;animation:popin .5s ease">
+    <div style="width:40px;height:40px;border-radius:50%;background:#6b8cae;display:grid;place-items:center;font-family:'Do Hyeon',sans-serif;font-size:17px;flex:none">?</div>
+    <div style="flex:1">
+      <div style="font-size:13px;font-weight:700">새 목소리가 들려요!</div>
+      <div style="font-size:11px;color:#cbbf9f">자리를 정해주면 계속 그 자리에서 보여요</div>
+    </div>
+    <div style="background:#f4a259;color:#2b2115;border-radius:999px;padding:8px 14px;font-size:12px;font-weight:700;white-space:nowrap">자리 주기</div>
+  </div>
+  <div style="padding:0 16px 18px">
+    <div style="background:#e2574c;color:#fff;border-radius:16px;text-align:center;padding:14px;font-family:'Do Hyeon',sans-serif;font-size:16px;letter-spacing:1px">⏹ 듣기 종료</div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════ 1b 누구말? : 만화책 스타일 ═══════════════ -->
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>누구말? — 만화책 스타일, 굵은 외곽선 + 말꼬리, 새 화자 확인 팝업</div>
+<div class="dv-card" style="width:390px;background:#fffdf5">
+<div style="display:flex;flex-direction:column;min-height:780px;font-family:'Gaegu',sans-serif;color:#141414;position:relative">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:3px solid #141414;background:#ffd84d">
+    <div style="font-family:'Black Han Sans',sans-serif;font-size:26px">누구말?</div>
+    <div style="display:flex;align-items:center;gap:6px;background:#141414;color:#ffd84d;border-radius:999px;padding:5px 12px;font-size:14px;font-weight:700">
+      <span style="width:8px;height:8px;border-radius:50%;background:#ff5a4e;animation:blink 1.2s infinite"></span>ON AIR
+    </div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:20px;padding:24px 18px">
+    <div style="display:flex;gap:10px;align-items:flex-start">
+      <div style="width:52px;height:52px;border-radius:50%;background:#7cc6fe;border:3px solid #141414;display:grid;place-items:center;font-family:'Black Han Sans',sans-serif;font-size:22px;flex:none">A</div>
+      <div style="position:relative;background:#fff;border:3px solid #141414;border-radius:14px;padding:10px 14px;font-size:20px;line-height:1.35;box-shadow:4px 4px 0 #141414;max-width:75%">
+        <span style="position:absolute;left:-13px;top:16px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:13px solid #141414"></span>
+        우리 몇 시에 갈까?
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:flex-start;flex-direction:row-reverse">
+      <div style="width:52px;height:52px;border-radius:50%;background:#ff9ecd;border:3px solid #141414;display:grid;place-items:center;font-family:'Black Han Sans',sans-serif;font-size:22px;flex:none">B</div>
+      <div style="position:relative;background:#fff;border:3px solid #141414;border-radius:14px;padding:10px 14px;font-size:20px;line-height:1.35;box-shadow:-4px 4px 0 #141414;max-width:75%">
+        <span style="position:absolute;right:-13px;top:16px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #141414"></span>
+        나는 세 시 괜찮아!
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:flex-start">
+      <div style="width:52px;height:52px;border-radius:50%;background:#7cc6fe;border:3px solid #141414;display:grid;place-items:center;font-family:'Black Han Sans',sans-serif;font-size:22px;flex:none;animation:pulse 1.4s infinite">A</div>
+      <div style="position:relative;background:#ffd84d;border:3px solid #141414;border-radius:14px;padding:10px 14px;font-size:20px;line-height:1.35;box-shadow:4px 4px 0 #141414;max-width:75%">
+        <span style="position:absolute;left:-13px;top:16px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:13px solid #141414"></span>
+        좋아, 세 시에 보자!
+      </div>
+    </div>
+  </div>
+  <!-- review popup -->
+  <div style="margin:0 14px 14px;background:#fff;border:3px solid #141414;border-radius:18px;box-shadow:6px 6px 0 #141414;padding:16px;animation:popin .5s ease">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <div style="width:44px;height:44px;border-radius:50%;background:#b8f26d;border:3px solid #141414;display:grid;place-items:center;font-family:'Black Han Sans',sans-serif;font-size:20px">?</div>
+      <div>
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:18px">앗, 새로운 목소리!</div>
+        <div style="font-size:15px;color:#666">이 사람 어디 있어요?</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <div style="flex:1;text-align:center;border:3px solid #141414;border-radius:12px;padding:9px 0;font-size:16px;font-weight:700;background:#fff">← 왼쪽</div>
+      <div style="flex:1;text-align:center;border:3px solid #141414;border-radius:12px;padding:9px 0;font-size:16px;font-weight:700;background:#ffd84d;box-shadow:3px 3px 0 #141414">↑ 맞은편</div>
+      <div style="flex:1;text-align:center;border:3px solid #141414;border-radius:12px;padding:9px 0;font-size:16px;font-weight:700;background:#fff">오른쪽 →</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <div style="flex:1;border:3px solid #141414;border-radius:12px;padding:9px 12px;font-size:16px;color:#999">이름 (선택) 예: 지수</div>
+      <div style="border:3px solid #141414;border-radius:12px;padding:9px 16px;font-size:16px;font-weight:700;background:#141414;color:#ffd84d">확인!</div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:center;padding:0 14px 18px">
+    <div style="width:100%;background:#ff5a4e;border:3px solid #141414;border-radius:14px;box-shadow:4px 4px 0 #141414;color:#fff;text-align:center;padding:12px;font-family:'Black Han Sans',sans-serif;font-size:18px">듣기 그만!</div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════ 1c 무대 다크 모드 ═══════════════ -->
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>무대 스포트라이트 — 다크 모드, 화자마다 자기 조명 자리</div>
+<div class="dv-card" style="width:390px;background:#101014">
+<div style="display:flex;flex-direction:column;min-height:780px;font-family:'IBM Plex Sans KR',sans-serif;color:#f2efe6">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px 8px">
+    <div style="font-weight:700;font-size:20px;letter-spacing:2px">말자리<span style="color:#ffd65a">.</span></div>
+    <div style="font-size:11px;color:#8b8b96;letter-spacing:2px">LIVE <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff5a4e;animation:blink 1.3s infinite;vertical-align:1px"></span></div>
+  </div>
+  <!-- stage -->
+  <div style="padding:14px 20px 0">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div style="width:0;height:0;border-left:26px solid transparent;border-right:26px solid transparent;border-bottom:34px solid rgba(255,214,90,.14)"></div>
+        <div style="width:50px;height:50px;border-radius:50%;background:#ffd65a;color:#101014;display:grid;place-items:center;font-weight:700;font-size:19px;margin-top:-18px;animation:glow 1.8s infinite">민</div>
+        <div style="font-size:12px;color:#ffd65a;font-weight:700">민수</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.45">
+        <div style="width:0;height:0;border-left:26px solid transparent;border-right:26px solid transparent;border-bottom:34px solid rgba(255,255,255,.06)"></div>
+        <div style="width:50px;height:50px;border-radius:50%;border:2px dashed #4a4a55;display:grid;place-items:center;font-size:18px;color:#4a4a55;margin-top:-18px">?</div>
+        <div style="font-size:12px;color:#5b5b66">대기 중</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div style="width:0;height:0;border-left:26px solid transparent;border-right:26px solid transparent;border-bottom:34px solid rgba(124,198,254,.12)"></div>
+        <div style="width:50px;height:50px;border-radius:50%;background:#7cc6fe;color:#101014;display:grid;place-items:center;font-weight:700;font-size:19px;margin-top:-18px">지</div>
+        <div style="font-size:12px;color:#7cc6fe;font-weight:700">지수</div>
+      </div>
+    </div>
+    <div style="height:2px;background:linear-gradient(90deg,transparent,#3a3a44,transparent);margin-top:14px"></div>
+  </div>
+  <!-- captions in columns -->
+  <div style="flex:1;display:flex;flex-direction:column;gap:16px;padding:22px 20px">
+    <div style="align-self:flex-start;max-width:80%;border-left:3px solid #ffd65a;padding:6px 0 6px 14px">
+      <div style="font-size:24px;line-height:1.4;font-weight:500">우리 발표 몇 시에 시작하지?</div>
+    </div>
+    <div style="align-self:flex-end;max-width:80%;border-right:3px solid #7cc6fe;padding:6px 14px 6px 0;text-align:right">
+      <div style="font-size:24px;line-height:1.4;font-weight:500;color:#d8ecfd">네 시에 시작해.</div>
+    </div>
+    <div style="align-self:flex-start;max-width:80%;border-left:3px solid #ffd65a;padding:6px 0 6px 14px">
+      <div style="font-size:24px;line-height:1.4;font-weight:500;color:#ffe9a8">그러면 세 시 반에 만나자<span style="display:inline-block;width:10px;height:24px;background:#ffd65a;margin-left:4px;vertical-align:-3px;animation:blink .9s infinite"></span></div>
+    </div>
+  </div>
+  <!-- new speaker sheet -->
+  <div style="margin:0 14px 12px;background:#1b1b22;border:1px solid #2e2e38;border-radius:20px;padding:16px;animation:popin .5s ease">
+    <div style="font-size:14px;font-weight:700;margin-bottom:4px">🔦 새 목소리 감지 — Speaker 2</div>
+    <div style="font-size:12px;color:#8b8b96;margin-bottom:12px">무대 위 자리를 정해주세요. 한 번 정하면 계속 그 자리예요.</div>
+    <div style="display:flex;gap:8px">
+      <div style="flex:1;text-align:center;background:#26262e;border-radius:12px;padding:10px 0;font-size:13px;color:#c9c9d2">← 왼쪽</div>
+      <div style="flex:1;text-align:center;background:#ffd65a;color:#101014;border-radius:12px;padding:10px 0;font-size:13px;font-weight:700">↑ 맞은편</div>
+      <div style="flex:1;text-align:center;background:#26262e;border-radius:12px;padding:10px 0;font-size:13px;color:#c9c9d2">오른쪽 →</div>
+    </div>
+  </div>
+  <div style="padding:0 14px 18px">
+    <div style="border:1px solid #3a3a44;border-radius:16px;text-align:center;padding:13px;font-size:14px;color:#c9c9d2;letter-spacing:2px">⏹ 공연 종료</div>
+  </div>
+</div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">다음 시도: "<a class="dv-oid" href="#1a">1a</a>의 자리 배정을 <a class="dv-oid" href="#1b">1b</a> 만화 스타일로" · "<a class="dv-oid" href="#1b">1b</a>로 새 화자 등장 애니메이션까지 있는 인터랙티브 프로토타입" · "새로운 방향 더 보여줘"</p>
+</section>
+</x-dc>
+</body>
+</html>
