@@ -28,9 +28,9 @@
           <span class="engine-dot" aria-hidden="true"></span>
           <span id="engineText">로컬 AI 확인 중</span>
         </div>
-        <div class="engine-badge speaker-badge" id="speakerBadge" data-state="ready" title="2인 발화 순서 모드">
+        <div class="engine-badge speaker-badge" id="speakerBadge" data-state="ready" title="로컬 자막 상태">
           <span class="engine-dot" aria-hidden="true"></span>
-          <span id="speakerText">2인 순서 모드 · 1 ↔ 2</span>
+          <span id="speakerText">로컬 자막 준비됨</span>
         </div>
         <button class="icon-button" id="prototypeButton" type="button" aria-label="프로토타입 범위 보기">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 10.8v6"></path><circle cx="12" cy="7.4" r=".8" fill="currentColor" stroke="none"></circle></svg>
@@ -43,7 +43,7 @@
         <div class="welcome-copy">
           <div class="eyebrow"><span aria-hidden="true">●</span> 목소리마다 자막 자리 하나</div>
           <h1 id="welcomeTitle">말에도<br><em>자리가 필요하니까.</em></h1>
-          <p>누구말?은 한국어 대화를 이 PC 안에서 받아쓰고,<br class="desktop-only"> 발화 순서대로 사람 1과 사람 2 자막을 번갈아 보여줘요.</p>
+          <p>누구말?은 한국어 대화를 이 PC 안에서 받아쓰고,<br class="desktop-only"> 화자별 자막을 각자의 자리에서 보여줘요.</p>
 
           <div class="welcome-actions">
             <button class="primary-button" id="startButton" type="button">
@@ -59,7 +59,7 @@
           </div>
         </div>
 
-        <div class="hero-demo" aria-label="사람 1과 사람 2 자막이 번갈아 나타나는 예시">
+        <div class="hero-demo" aria-label="여러 화자의 자막이 각자 위치에 나타나는 예시">
           <div class="hero-sticker sticker-left">“우리 몇 시에 갈까?”</div>
           <div class="hero-sticker sticker-right">“세 시 어때?”</div>
           <div class="person person-left" aria-hidden="true"><span class="hair"></span><span class="face"><i></i><i></i><b></b></span><span class="body"></span></div>
@@ -71,9 +71,9 @@
         <div class="flow-strip" aria-label="작동 과정">
           <div><span class="flow-number">1</span><p><strong>듣고</strong><small>한국어 실시간 자막</small></p></div>
           <span class="flow-arrow" aria-hidden="true">→</span>
-          <div><span class="flow-number">2</span><p><strong>나누고</strong><small>발화마다 사람 1 ↔ 2</small></p></div>
+          <div><span class="flow-number">2</span><p><strong>나누고</strong><small>화자별 자막 표시</small></p></div>
           <span class="flow-arrow" aria-hidden="true">→</span>
-          <div><span class="flow-number">3</span><p><strong>자리 잡고</strong><small>두 자리를 번갈아 표시</small></p></div>
+          <div><span class="flow-number">3</span><p><strong>자리 잡고</strong><small>같은 자리를 유지</small></p></div>
         </div>
       </section>
 
@@ -93,7 +93,7 @@
               <span class="section-kicker">오늘의 말자리</span>
               <h2 id="seatHeading">목소리가 자기 자리를 찾아가요</h2>
             </div>
-            <span class="seat-hint">첫 발화는 왼쪽, 다음 발화는 오른쪽이에요</span>
+            <span class="seat-hint">같은 화자는 같은 자리에서 보여줘요</span>
           </div>
           <div class="seat-grid" id="seatGrid"></div>
         </section>
@@ -122,7 +122,7 @@
         <div class="control-dock">
           <div class="dock-copy">
             <span class="dock-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-            <span><strong id="dockTitle">계속 듣고 있어요</strong><small id="dockSubtitle">발화마다 사람 1과 사람 2를 번갈아 표시해요</small></span>
+            <span><strong id="dockTitle">계속 듣고 있어요</strong><small id="dockSubtitle">한국어 대화를 실시간 자막으로 보여줘요</small></span>
           </div>
           <button class="hearing-range" id="hearingRangeButton" type="button" data-profile="near">
             <span class="range-icon" aria-hidden="true">◎</span>
@@ -156,9 +156,9 @@
         <h3><span class="scope-check">✓</span> 지금 동작해요</h3>
         <ul>
           <li>한국어 전용 로컬 실시간 STT</li>
-          <li>발화 순서 기반 사람 1 ↔ 사람 2 반복</li>
+          <li>실시간 화자별 공간 자막</li>
           <li>내 테이블 중심 배경음 차단</li>
-          <li>사람 1은 왼쪽, 사람 2는 오른쪽 자막</li>
+          <li>화자별 고정 위치 자막</li>
           <li>API 호출 없이 PC 내부에서만 처리</li>
         </ul>
       </section>
@@ -166,7 +166,6 @@
         <h3><span class="scope-warn">△</span> 아직 지원하지 않아요</h3>
         <ul>
           <li>실제 음원의 방향 자동 감지</li>
-          <li>실제 목소리 특징을 이용한 화자 식별</li>
           <li>이전 세션의 화자 기억</li>
           <li>겹쳐 말하기의 완벽한 분리</li>
           <li>비언어적 소리 인식</li>
@@ -175,7 +174,7 @@
     </div>
     <div class="model-note">
       <strong>이 PC의 모델</strong>
-      <p>Nemotron 3.5 한국어 STT · 발화 순서 2인 모드 · CUDA</p>
+      <p>Nemotron 3.5 한국어 STT · 로컬 실시간 처리 · CUDA</p>
     </div>
     <form method="dialog"><button class="primary-button compact" type="submit">확인했어요</button></form>
   </dialog>
